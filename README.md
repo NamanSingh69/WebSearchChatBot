@@ -1,4 +1,3 @@
-```markdown
 # Context-Aware Research Assistant with RAG
 
 This Python script implements a **Context-Aware Research Assistant** that leverages **Retrieval-Augmented Generation (RAG)** to answer your questions using up-to-date information from the web. It combines the power of the **SERP API** for web searching and the **Gemini API** for generating insightful and contextually relevant answers.
@@ -49,8 +48,8 @@ Before running this script, ensure you have the following:
 
 1. **Clone the repository (or download the script):**
    ```bash
-   git clone [repository-url]  # Replace with your repository URL if you have one
-   cd [repository-directory] # Navigate into the directory
+   git clone https://github.com/NamanSingh69/Personal-RAG
+   cd Personal-RAG
    ```
    If you downloaded the script directly, place it in a directory of your choice and navigate to it in your terminal.
 
@@ -77,7 +76,7 @@ Before running this script, ensure you have the following:
 2. **Navigate to the directory where you saved the Python script.**
 3. **Run the script using Python:**
    ```bash
-   python your_script_name.py  # Replace 'your_script_name.py' with the actual name of your script file
+   python WebSearchChatBot.py
    ```
 
 4. **Follow the on-screen instructions in the chat interface.** You can now start asking questions to the Context-Aware Research Assistant!
@@ -135,8 +134,7 @@ Assistant: Goodbye! Feel free to return with more questions.
 
 ## License
 
-Feel free to use and modify this code for your own purposes.  (Consider adding a specific license like MIT if you want to formally open-source it).
-
+Feel free to use and modify this code for your own purposes.  
 ---
 
 **Disclaimer:** This script uses third-party APIs (SERP API and Gemini API) and is subject to their terms of service and usage limits. Please ensure you are aware of and comply with their respective terms.
