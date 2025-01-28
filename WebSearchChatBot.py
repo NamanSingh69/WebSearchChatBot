@@ -3,9 +3,9 @@ import google.generativeai as genai
 from bs4 import BeautifulSoup
 
 # API Configuration (Replace with your keys)
-genai.configure(api_key="Enter your Gemini API Key here")
-model = genai.GenerativeModel('gemini-pro')
-SERPAPI_KEY = "Enter your SERP API Key here"
+genai.configure(api_key="Enter your Gemini API key here")
+model = genai.GenerativeModel('gemini-exp-1206')
+SERPAPI_KEY = "Enter your SERP API key here"
 
 class SerpApiRAG:
     def __init__(self):
@@ -70,9 +70,9 @@ class SerpApiRAG:
 {web_context}
 
 **Instructions**
-1. Answer the new question considering both contexts
-2. Resolve pronouns (e.g., 'there' -> Paris)
-3. Cite sources like [[1]] when using specific info
+1. Answer the new question considering all contexts
+2. Resolve pronouns being aware of the context of the situation
+3. Cite sources like [[1]] when using specific info, also name the sources at the end of your response
 4. If conflicting info, state clearly
 5. Be concise but thorough
 
@@ -83,17 +83,36 @@ class SerpApiRAG:
         response = model.generate_content(prompt)
         return response.text
 
-    def rag_query(self, query, num_sources=3):
-        # Enhance query with conversation context
-        enhanced_query = query
-        if self.conversation_history:
-            last_exchange = self.conversation_history[-1]
-            if 'paris' in last_exchange['assistant'].lower():
-                enhanced_query += " in Paris, France"
-            elif 'france' in last_exchange['assistant'].lower():
-                enhanced_query += " in France"
+    def generate_search_query(self, user_query):
+        # Build conversation context (last 2 exchanges)
+        history_context = "\n".join(
+            [f"User: {entry['user']}\nAssistant: {entry['assistant']}" 
+             for entry in self.conversation_history[-2:]]
+        ) if self.conversation_history else "No previous conversation"
 
-        # Get fresh web results
+        prompt = f"""**Conversation Context**
+{history_context}
+
+**New Question**
+{user_query}
+
+Generate a concise and effective Google search query that best addresses the new question considering the conversation context. Focus on key terms and avoid unnecessary words. Output ONLY the search query itself without any additional text."""
+
+        try:
+            response = model.generate_content(prompt)
+            # Clean response - take first line, remove quotes
+            generated_query = response.text.split('\n')[0].strip('"\'')
+            return generated_query or user_query  # Fallback to original
+        except Exception as e:
+            print(f"Query generation error: {str(e)}")
+            return user_query
+
+    def rag_query(self, query, num_sources=10):
+        # Generate context-aware search query
+        enhanced_query = self.generate_search_query(query)
+        print(f"\033[90mGenerated search query: {enhanced_query}\033[0m")  # Debug output
+
+        # Get fresh web results using generated query
         urls = self.search_web(enhanced_query, num_results=num_sources)
         context_chunks = []
         
@@ -106,9 +125,9 @@ class SerpApiRAG:
         # Generate answer
         answer = self.generate_answer(query, context_chunks)
         
-        # Update history (keep last 5 exchanges)
+        # Update history (keep last 10 exchanges)
         self.conversation_history.append({"user": query, "assistant": answer})
-        if len(self.conversation_history) > 5:
+        if len(self.conversation_history) > 10:
             self.conversation_history.pop(0)
             
         return answer
