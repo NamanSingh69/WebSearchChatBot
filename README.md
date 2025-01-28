@@ -54,7 +54,7 @@ Installation
 
 Clone the repository (or download the script):
 
-git clone https://github.com/NamanSingh69/Personal-RAG  
+git clone https://github.com/NamanSingh69/Personal-RAG
 cd Personal-RAG
 content_copy
 download
@@ -168,7 +168,6 @@ Output Formatting: Improve the formatting of the generated answers for better re
 License
 
 Feel free to use and modify this code for your own purposes. 
-
 Disclaimer: This script uses third-party APIs (SERP API and Gemini API) and is subject to their terms of service and usage limits. Please ensure you are aware of and comply with their respective terms.
 
 content_copy
