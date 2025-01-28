@@ -55,10 +55,8 @@ Installation
 Clone the repository (or download the script):
 
 git clone https://github.com/NamanSingh69/Personal-RAG
+
 cd Personal-RAG
-content_copy
-download
-Use code with caution.
 Bash
 
 If you downloaded the script directly, place it in a directory of your choice and navigate to it in your terminal.
