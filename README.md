@@ -48,8 +48,8 @@ Before running this script, ensure you have the following:
 
 1. **Clone the repository (or download the script):**
    ```bash
-   git clone https://github.com/NamanSingh69/Personal-RAG
-   cd Personal-RAG
+   git clone https://github.com/NamanSingh69/WebSearchChatBot
+   cd WebSearchChatBot
    ```
    If you downloaded the script directly, place it in a directory of your choice and navigate to it in your terminal.
 
