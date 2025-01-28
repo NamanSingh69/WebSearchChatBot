@@ -3,9 +3,9 @@ import google.generativeai as genai
 from bs4 import BeautifulSoup
 
 # API Configuration (Replace with your keys)
-genai.configure(api_key="AIzaSyCszqTt8bYM1mkwqF0DInV6CCwsFUA1_7M")
+genai.configure(api_key="Enter your Gemini API Key here")
 model = genai.GenerativeModel('gemini-pro')
-SERPAPI_KEY = "de5ef818d64e84a7bdc296e6154147d6878a5fd42544f57984ba6660b7bfc9a6"
+SERPAPI_KEY = "Enter your SERP API Key here"
 
 class SerpApiRAG:
     def __init__(self):
