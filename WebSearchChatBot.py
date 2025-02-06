@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # API Configuration (Replace with your keys)
 genai.configure(api_key="Enter your Gemini API key here")
-model = genai.GenerativeModel('gemini-exp-1206')
+model = genai.GenerativeModel('gemini-2.0-pro-exp-02-05')
 SERPAPI_KEY = "Enter your SERP API key here"
 
 class SerpApiRAG:
